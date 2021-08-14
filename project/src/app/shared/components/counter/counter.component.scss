@@ -1,0 +1,52 @@
+.circle-timer {
+  display: flex;
+
+  .timer {
+    position: relative;
+    margin: auto 0;
+    height: 100%;
+  }
+
+  .svg {
+    height: 100%;
+    transform: scaleX(-1) rotateY(180deg);
+  }
+
+  .circle {
+    fill: none;
+    stroke: none;
+  }
+
+  .path-elapsed {
+    stroke-width: 10px;
+    color: brown;
+  }
+
+  .path-remaining {
+    stroke: currentColor;
+    stroke-width: 10px;
+    transform: rotate(90deg);
+    transform-origin: center;
+    transition: 1s linear all;
+    fill-rule: nonzero;
+  }
+
+  .label {
+    position: absolute;
+    font-size: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .side-note {
+    margin: auto 10px;
+  }
+
+  .reset-btn {
+    position: relative;
+    margin: auto 5px;
+  }
+}
+
+
