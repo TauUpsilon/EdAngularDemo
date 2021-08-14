@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user.model';
+import { ResponseBody } from './../../../shared/models/api-response.model';
 import { UserService } from './user.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { UserService } from './user.service';
 })
 export class UserComponent implements OnInit, AfterViewInit {
 
-  users$: Observable<User>;
+  users$: Observable<ResponseBody<User>>;
   userSubject = new Subject<void>();
 
   pageNum = 'page=1';

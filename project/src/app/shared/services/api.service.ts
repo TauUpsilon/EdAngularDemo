@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ResponseBody } from '../models/api-response.model';
 import { BaseRequest } from './../requests/base.request';
 
 
@@ -14,10 +15,10 @@ export class ApiService {
     private readonly http: HttpClient,
   ) { }
 
-  request<T>(request: BaseRequest): Observable<T> {
+  request<T>(request: BaseRequest): Observable<ResponseBody<T>> {
     const uri = `${this.baseUri}/${request.uri}`;
 
-    return this.http.get<T>(uri).pipe(tap(console.log));
+    return this.http.get<ResponseBody<T>>(uri).pipe(tap(console.log));
   }
 }
 

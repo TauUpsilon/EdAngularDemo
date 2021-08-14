@@ -7,7 +7,7 @@ class Pagination {
   pages: number;
   page: number;
   limit: number;
-  linkSet: LinkSet;
+  links: LinkSet;
 }
 
 class LinkSet {
