@@ -1,3 +1,7 @@
 export class BaseRequest {
-  name: string;
+  uri: string;
+
+  constructor(uri: string) {
+    this.uri = uri;
+  }
 }

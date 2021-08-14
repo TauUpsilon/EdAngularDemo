@@ -1,2 +1,23 @@
+<ng-container *ngIf="users$ | async as Users">
+  <ul class="list-group">
+    <ng-container *ngFor="let user of Users.data">
+      <li class="list-group-item d-flex justify-content-between">
+        <span class="my-auto">{{ user.id }} - {{ user.name }}</span>
 
+        <a class="btn btn-danger"> Delete </a>
+      </li>
+    </ng-container>
+  </ul>
 
+  <div class="my-4"></div>
+
+  <div class="d-flex justify-content-between">
+    <button
+      class="btn btn-secondary"
+      (click)="onPrevious(Users.meta.pagination.page)"
+    >
+      Previous
+    </button>
+    <button class="btn btn-primary" (click)="onNext()">Next</button>
+  </div>
+</ng-container>
