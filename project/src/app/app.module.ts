@@ -2,12 +2,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiService } from './shared/services/api.service';
+import { DateRequestEffect } from './store/effects/api-request.effect';
+import { dataRoomReducer } from './store/reducers/data-room.reducer';
+import { AppState } from './store/states/app.state';
 
+const reducers: ActionReducerMap<AppState> = {
+  dataRoom: dataRoomReducer
+};
 
 @NgModule({
   declarations: [
@@ -17,9 +23,9 @@ import { ApiService } from './shared/services/api.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([DateRequestEffect])
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

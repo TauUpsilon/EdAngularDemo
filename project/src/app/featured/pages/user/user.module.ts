@@ -10,9 +10,7 @@ import { UserComponent } from './user.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    UserRoutingModule,
-    // StoreModule.forFeature('users', userReducer),
-    // EffectsModule.forFeature([UserEffect])
+    UserRoutingModule
   ]
 })
 export class UserModule { }
