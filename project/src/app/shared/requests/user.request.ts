@@ -1,7 +1,10 @@
 import { BaseRequest } from './base.request';
 
-export class UserRequest extends BaseRequest {
+export class UserGetRequest extends BaseRequest {
   constructor(page: string) {
-    super(`users?${page}`);
+    super();
+    this.method = 'get';
+    this.name = 'users';
+    this.uri = `${this.name}?${page}`;
   }
 }
