@@ -24,7 +24,6 @@ export class ApiService {
       .pipe(
         select(DataRoomSelector.getDataRoom),
         switchMap(res => {
-          console.log(res);
           const apiData = new ApiData<T>();
           apiData.collection = res.collections?.get(request.name);
           apiData.status = res.status;

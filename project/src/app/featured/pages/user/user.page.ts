@@ -3,16 +3,16 @@ import { Observable, of, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user.model';
 import { unsortedOrder } from 'src/app/shared/overloads/keyvalue.overload';
-import { ApiData } from './../../../shared/models/api-data.model';
+import { ApiData } from '../../../shared/models/api-data.model';
 import { UserService } from './user.service';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  templateUrl: './user.page.html',
+  styleUrls: ['./user.page.scss'],
   providers: [UserService],
 })
-export class UserComponent implements OnInit, AfterViewInit {
+export class UserPage implements OnInit, AfterViewInit {
   users$: Observable<ApiData<User>>;
   userSubject = new Subject<void>();
 

@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
-import { UserComponent } from './user.component';
+import { UserPage } from './user.page';
 
 @NgModule({
-  declarations: [UserComponent],
+  declarations: [UserPage],
   imports: [
     CommonModule,
     FormsModule,

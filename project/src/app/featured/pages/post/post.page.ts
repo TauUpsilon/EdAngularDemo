@@ -8,11 +8,11 @@ import { PostService } from './post.service';
 
 @Component({
   selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss'],
+  templateUrl: './post.page.html',
+  styleUrls: ['./post.page.scss'],
   providers: [PostService],
 })
-export class PostComponent implements OnInit, AfterViewInit {
+export class PostPage implements OnInit, AfterViewInit {
   posts$: Observable<ApiData<Post>>;
   postSubject = new Subject<void>();
 
