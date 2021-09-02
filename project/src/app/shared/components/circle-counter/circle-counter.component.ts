@@ -1,20 +1,14 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
-
-interface SecondToTime {
-  currentDays: string;
-  currentHours: string;
-  currentMinutes: string;
-  currentSeconds: string;
-}
+import { SecondToTime } from './circle-counter.interface';
 
 @Component({
-  selector: 'app-counter',
-  templateUrl: './counter.component.html',
-  styleUrls: ['./counter.component.scss']
+  selector: 'app-circle-counter',
+  templateUrl: './circle-counter.component.html',
+  styleUrls: ['./circle-counter.component.scss']
 })
-export class CounterComponent implements OnChanges {
+export class CircleCounterComponent implements OnChanges {
 
   // 宣告倒數總時間
   @Input() timeLimit: number;
