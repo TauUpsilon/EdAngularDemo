@@ -4,6 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'attempts',
+    loadChildren: () => import('./featured/pages/attempt/attempt.module')
+      .then(m => m.AttemptModule)
+  },
+  {
     path: 'users',
     loadChildren: () => import('./featured/pages/user/user.module')
       .then(m => m.UserModule)

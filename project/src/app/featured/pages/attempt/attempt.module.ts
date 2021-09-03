@@ -1,0 +1,20 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedComponentModule } from 'src/app/shared/components/shared-component.module';
+import { SharedDirectiveModule } from 'src/app/shared/directives/shared-directive.module';
+import { AttemptRoutingModule } from './attempt-routing.module';
+import { AttemptPage } from './attempt.page';
+
+@NgModule({
+  declarations: [AttemptPage],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AttemptRoutingModule,
+    SharedComponentModule,
+    SharedDirectiveModule
+  ]
+})
+export class AttemptModule { }
