@@ -8,4 +8,10 @@ export class DataRoom {
 export class Collection<T> {
   meta: Meta;
   data: Array<T>;
+
+  constructor(obj: Collection<any>) {
+    if (obj) {
+      Object.assign(this, obj);
+    }
+  }
 }
