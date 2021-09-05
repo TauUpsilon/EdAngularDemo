@@ -29,9 +29,14 @@ export class DateRequestEffect {
           case 'get':
             return this.http.get<Collection<any>>(uri)
               .pipe(
-                map((res) =>
-                  new DataRequestAction('SUCCESS', res, action.request)
-                ),
+                map((res) => {
+                  const payload = new Collection({
+                    meta: res.meta,
+                    data: res.data.map((d) => new action.model(d))
+                  });
+
+                  return new DataRequestAction('SUCCESS', payload, action.request);
+                }),
                 catchError((err) => of(new DataRequestAction('FAILURE')))
               );
 

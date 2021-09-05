@@ -5,7 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import { DataRequestAction } from 'src/app/store/actions/data-request.action';
 import * as DataRoomSelector from 'src/app/store/selectors/app.selector';
 import { AppState } from 'src/app/store/states/app.state';
-import { Collection } from '../models/data-room.model';
+import { Typeable } from '../types/typeable';
 import { ApiData } from './../models/api-data.model';
 import { BaseRequest } from './../requests/base.request';
 
@@ -16,8 +16,8 @@ export class ApiService {
     private readonly store: Store<AppState>,
   ) { }
 
-  request<T>(request: BaseRequest, collection: Collection<T>): Observable<ApiData<T>> {
-    const action = new DataRequestAction('LOADING', collection, request);
+  request<T>(request: BaseRequest, model: Typeable<T>): Observable<ApiData<T>> {
+    const action = new DataRequestAction('LOADING', undefined, request, model);
     this.store.dispatch(action);
 
     return this.store
