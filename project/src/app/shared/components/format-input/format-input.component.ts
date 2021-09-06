@@ -30,7 +30,7 @@ export class FormatInputComponent implements OnInit {
 
     if (this.value) {
       if (this.value.includes(this.outputFormat)) {
-        this.lastValue = this.value.replace(this.outputFormat, '');
+        this.lastValue = this.value.replaceAll(this.outputFormat, '');
       } else {
         this.lastValue = this.value;
       }
