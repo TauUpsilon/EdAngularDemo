@@ -4,19 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '', redirectTo: 'home', pathMatch:'full'
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./featured/pages/home/home.module')
+      .then(m => m.HomeModule)
+  },
+  {
     path: 'attempts',
     loadChildren: () => import('./featured/pages/attempt/attempt.module')
       .then(m => m.AttemptModule)
-  },
-  {
-    path: 'users',
-    loadChildren: () => import('./featured/pages/user/user.module')
-      .then(m => m.UserModule)
-  },
-  {
-    path: 'posts',
-    loadChildren: () => import('./featured/pages/post/post.module')
-      .then(m => m.PostModule)
   }
 ];
 

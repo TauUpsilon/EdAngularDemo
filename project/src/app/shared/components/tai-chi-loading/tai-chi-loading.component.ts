@@ -3,7 +3,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { getDataRoom } from './../../../store/selectors/app.selector';
+import { getDataRoom } from 'src/app/store/selectors/app.selector';
 
 @Component({
   selector: 'app-tai-chi-loading',
