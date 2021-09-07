@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { ActionReducerMap, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -29,7 +30,8 @@ const reducers: ActionReducerMap<AppState> = {
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([DateRequestEffect]),
     SharedComponentModule,
-    SharedDirectiveModule
+    SharedDirectiveModule,
+    BrowserAnimationsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
