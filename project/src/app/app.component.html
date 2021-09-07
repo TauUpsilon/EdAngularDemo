@@ -1,5 +1,5 @@
 <main class="mat-app-background">
-  <nav class="fixed top-0 left-0 right-0 z2">
+  <nav class="sticky top-0 left-0 right-0 z2">
     <mat-toolbar color="primary">
       <mat-toolbar class="justify-between" color="primary">
         <a class="h1 bold text-decoration-none text-accent" routerLink="home"
@@ -20,14 +20,14 @@
           </button>
 
           <mat-menu #modeMenu>
-            <button mat-menu-item (click)="onModeClick('light')">
+            <button *ngIf="this.isDarkMode" mat-menu-item (click)="onModeClick('light')">
               <mat-icon color="accent">light_mode</mat-icon>
-              <span [class.text-accent]="!this.isDarkMode">Light Mode</span>
+              <span>Light Mode</span>
             </button>
 
-            <button mat-menu-item (click)="onModeClick('dark')">
+            <button *ngIf="!this.isDarkMode" mat-menu-item (click)="onModeClick('dark')">
               <mat-icon color="accent">dark_mode</mat-icon>
-              <span [class.text-accent]="this.isDarkMode">Dark Mode</span>
+              <span>Dark Mode</span>
             </button>
           </mat-menu>
         </div>
@@ -36,13 +36,9 @@
 
   </nav>
 
-  <div class="py3"></div>
-
-  <section>
+  <section class="p1">
     <router-outlet></router-outlet>
   </section>
-
-  <div class="py3"></div>
 
   <footer>
 
