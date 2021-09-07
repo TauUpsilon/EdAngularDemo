@@ -3,7 +3,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Post } from 'src/app/shared/models/post.model';
 import { unsortedOrder } from 'src/app/shared/overloads/keyvalue.overload';
-import { ApiData } from '../../../shared/models/api-data.model';
+import { ApiData } from '../../../../../shared/models/api-data.model';
 import { PostService } from './post.service';
 
 @Component({
