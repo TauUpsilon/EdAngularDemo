@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-attempt',
@@ -12,9 +13,12 @@ export class AttemptPage implements OnInit {
   inputFormat = /\B(?=(\d{3})+(?!\d))/g;
   outputFormat = ',';
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+
   }
 
   onCatch(value: any): void {
