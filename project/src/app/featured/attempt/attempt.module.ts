@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentModule } from 'src/app/shared/components/shared-component.module';
 import { SharedDirectiveModule } from 'src/app/shared/directives/shared-directive.module';
+import { SharedPipeModule } from 'src/app/shared/pipes/shared-pipe.module';
 import { AttemptRoutingModule } from './attempt-routing.module';
 import { AttemptPage } from './attempt.page';
 
@@ -14,7 +15,8 @@ import { AttemptPage } from './attempt.page';
     ReactiveFormsModule,
     AttemptRoutingModule,
     SharedComponentModule,
-    SharedDirectiveModule
+    SharedDirectiveModule,
+    SharedPipeModule,
   ]
 })
 export class AttemptModule { }

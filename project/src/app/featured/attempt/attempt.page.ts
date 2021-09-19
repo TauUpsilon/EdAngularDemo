@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CurrencyConst } from 'src/app/shared/constants/currency';
 
 @Component({
   selector: 'app-attempt',
@@ -12,6 +13,8 @@ export class AttemptPage implements OnInit {
 
   inputFormat = /\B(?=(\d{3})+(?!\d))/g;
   outputFormat = ',';
+
+  ccy = CurrencyConst.getCCYByCode('TWD');
 
   constructor(
     private router: Router
