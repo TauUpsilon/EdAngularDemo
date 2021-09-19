@@ -1,6 +1,6 @@
 <ng-container *ngIf="posts$ | async as Posts">
   <ng-container *ngIf="Posts.status === 'SUCCESS'">
-    <div *ngFor="let post of Posts.collection.data | keyvalue: unsortedOrder; let inx = index;">
+    <div *ngFor="let post of Posts.collection.data | keyvalue: kvUtil.unsortedOrder; let inx = index;">
 
       <div class="py2" *ngIf="inx !== 0"></div>
 

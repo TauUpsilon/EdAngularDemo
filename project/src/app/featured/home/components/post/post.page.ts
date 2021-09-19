@@ -3,7 +3,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ApiData } from 'src/app/shared/models/api-data.model';
 import { Post } from 'src/app/shared/models/post.model';
-import { unsortedOrder } from 'src/app/shared/overloads/keyvalue.overload';
+import { KeyValueUtil } from './../../../../shared/utils/keyvalue.util';
 import { PostService } from './post.service';
 
 
@@ -19,9 +19,7 @@ export class PostPage implements OnInit, AfterViewInit {
 
   pageNum = 'page=1';
 
-  get unsortedOrder(): any {
-    return unsortedOrder;
-  }
+  kvUtil = KeyValueUtil;
 
   constructor(private readonly postService: PostService) {}
 
