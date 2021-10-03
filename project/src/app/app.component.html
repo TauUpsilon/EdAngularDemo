@@ -2,9 +2,9 @@
   <nav class="sticky top-0 left-0 right-0 z2">
     <mat-toolbar color="primary">
       <mat-toolbar class="justify-between" color="primary">
-        <a class="h1 bold text-decoration-none text-accent" routerLink="home"
-          >Angular Demo</a
-        >
+        <a class="h1 bold text-decoration-none text-accent" routerLink="home">
+          Angular Demo - ( {{ env.scope | uppercase }} )
+        </a>
 
         <div>
           <a mat-icon-button routerLink="home" color="accent">
@@ -33,7 +33,6 @@
         </div>
       </mat-toolbar>
     </mat-toolbar>
-
   </nav>
 
   <section class="p1">

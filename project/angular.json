@@ -35,7 +35,23 @@
             ]
           },
           "configurations": {
-            "production": {
+            "lan": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.lan.ts"
+                }
+              ]
+            },
+            "wan": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.wan.ts"
+                }
+              ]
+            },
+            "prod": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -71,8 +87,14 @@
             "browserTarget": "project:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "project:build:production"
+            "lan": {
+              "browserTarget": "project:build:lan"
+            },
+            "wan": {
+              "browserTarget": "project:build:wan"
+            },
+            "prod": {
+              "browserTarget": "project:build:prod"
             }
           }
         },
