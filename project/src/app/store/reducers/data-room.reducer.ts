@@ -10,22 +10,19 @@ export function dataRoomReducer(state: DataRoom, action: DataRequestAction): Dat
       };
 
     case 'SUCCESS':
-      const room = new Map(state.collections);
+      const room = new Map(state.collection);
       room.set(action.request.name, action.payload);
 
       return {
         ...state,
         status: 'SUCCESS',
-        collections: room
+        collection: room
       };
 
     case 'FAILURE':
       return {
         ...state,
-        status: 'FAILURE',
-        collections: {
-          ...room
-        },
+        status: 'FAILURE'
       };
 
     default:
