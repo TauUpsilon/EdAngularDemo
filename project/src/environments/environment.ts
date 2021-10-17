@@ -1,5 +1,5 @@
 export const environment = {
   env: 'dev',
-  scope: 'null',
+  scope: '',
   production: false
 };

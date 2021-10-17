@@ -3,7 +3,7 @@
     <mat-toolbar color="primary">
       <mat-toolbar class="justify-between" color="primary">
         <a class="h1 bold text-decoration-none text-accent" routerLink="home">
-          Angular Demo - ( {{ env.scope | uppercase }} )
+          Angular Demo <span *ngIf="env.scope" > - ( {{ env.scope | uppercase }} )</span>
         </a>
 
         <div>
