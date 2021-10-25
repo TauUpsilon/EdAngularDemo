@@ -1,4 +1,7 @@
+import { getGlobalData } from './../../store/global-data/global-data.selector';
+import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
+import { UpdateGlobalDataProperties } from 'src/app/store/global-data';
 
 
 @Component({
@@ -8,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() {}
+  constructor(
 
-  ngOnInit(): void  { }
+  ) {}
+
+  ngOnInit(): void  {
+
+  }
 }

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { DataRequestAction } from 'src/app/store/actions/data-request.action';
-import * as DataRoomSelector from 'src/app/store/selectors/app.selector';
-import { AppState } from 'src/app/store/states/app.state';
+import { DataRoomAction } from 'src/app/store/data-room/data-room.action';
+import * as DataRoomSelector from 'src/app/store/app/app.selector';
+import { AppState } from 'src/app/store/app/app.state';
 
 import { Typeable } from '../types/typeable';
 import { ApiData } from './../models/api-data.model';
@@ -18,7 +18,7 @@ export class ApiService {
   ) { }
 
   request<T>(request: BaseRequest, model: Typeable<T>): Observable<ApiData<T>> {
-    const action = new DataRequestAction('LOADING', undefined, request, model);
+    const action = new DataRoomAction('LOADING', undefined, request, model);
     this.store.dispatch(action);
 
     return this.store

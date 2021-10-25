@@ -1,3 +1,4 @@
+import { GlobalDataEffect } from './store/global-data/global-data.effect';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,13 +12,20 @@ import { SharedComponentModule } from './shared/components/shared-component.modu
 import { SharedDirectiveModule } from './shared/directives/shared-directive.module';
 import { SharedPipeModule } from './shared/pipes/shared-pipe.module';
 import { ApiService } from './shared/services/api.service';
-import { DateRequestEffect } from './store/effects/api-request.effect';
-import { dataRoomReducer } from './store/reducers/data-room.reducer';
-import { AppState } from './store/states/app.state';
+import { DataRoomEffect } from './store/data-room/data-room.effect';
+import { globalDataReducer } from './store/global-data/global-data.reducer';
+import { dataRoomReducer } from './store/data-room/data-room.reducer';
+import { AppState } from './store/app/app.state';
 
 const reducers: ActionReducerMap<AppState> = {
-  dataRoom: dataRoomReducer
+  dataRoom: dataRoomReducer,
+  globalData: globalDataReducer
 };
+
+const effects = [
+  DataRoomEffect,
+  GlobalDataEffect
+];
 
 @NgModule({
   declarations: [
@@ -29,7 +37,7 @@ const reducers: ActionReducerMap<AppState> = {
     HttpClientModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([DateRequestEffect]),
+    EffectsModule.forRoot(effects),
     SharedComponentModule,
     SharedDirectiveModule,
     SharedPipeModule,

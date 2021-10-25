@@ -5,11 +5,11 @@ import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Collection } from 'src/app/shared/models/data-room.model';
-import { DataRequestAction } from '../actions/data-request.action';
+import { DataRoomAction } from './data-room.action';
 
 
 @Injectable()
-export class DateRequestEffect {
+export class DataRoomEffect {
   constructor(
     private readonly actions$: Actions,
     private readonly http: HttpClient
@@ -18,7 +18,7 @@ export class DateRequestEffect {
 
   load$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
-      ofType<DataRequestAction>('LOADING'),
+      ofType<DataRoomAction>('LOADING'),
       mergeMap((action, index) => {
         const baseUri = 'https://gorest.co.in/public/v1';
         const request = action.request;
@@ -35,9 +35,9 @@ export class DateRequestEffect {
                     data: res.data.map((d) => new action.model(d))
                   });
 
-                  return new DataRequestAction('SUCCESS', payload, action.request);
+                  return new DataRoomAction('SUCCESS', payload, action.request);
                 }),
-                catchError((err) => of(new DataRequestAction('FAILURE')))
+                catchError((err) => of(new DataRoomAction('FAILURE')))
               );
 
           case 'post':
@@ -48,9 +48,9 @@ export class DateRequestEffect {
             return this.http.post<Collection<any>>(uri, body)
             .pipe(
               map((res) =>
-                new DataRequestAction('SUCCESS', res, action.request)
+                new DataRoomAction('SUCCESS', res, action.request)
               ),
-              catchError((err) => of(new DataRequestAction('FAILURE')))
+              catchError((err) => of(new DataRoomAction('FAILURE')))
             );
           default:
             break;

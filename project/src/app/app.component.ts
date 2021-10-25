@@ -1,7 +1,12 @@
+import { switchMap } from 'rxjs/operators';
+import { ClearGlobalData, ClearGlobalOtherData } from './store/global-data/global-data.action';
+import { select, Store } from '@ngrx/store';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../environments/environment'
+import { getGlobalData, UpdateGlobalDataProperties } from './store/global-data';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +18,17 @@ export class AppComponent implements OnInit {
 
   title = 'Edward\'s Angular Demo';
 
-  env: typeof environment = environment
+  env: typeof environment = environment;
 
   isDarkMode = false;
 
+  testSubject = new Subject();
+  subscription = new Subscription();
+
   constructor(
     private readonly titleService: Title,
-    private readonly overlayContainer: OverlayContainer
+    private readonly overlayContainer: OverlayContainer,
+    private readonly store: Store
   ) { }
 
   ngOnInit() {

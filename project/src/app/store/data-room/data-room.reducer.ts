@@ -1,7 +1,7 @@
 import { DataRoom } from 'src/app/shared/models/data-room.model';
-import { DataRequestAction } from '../actions/data-request.action';
+import { DataRoomAction } from './data-room.action';
 
-export function dataRoomReducer(state: DataRoom, action: DataRequestAction): DataRoom {
+export function dataRoomReducer(state: DataRoom, action: DataRoomAction): DataRoom {
   switch (action.type) {
     case 'LOADING':
       return {
