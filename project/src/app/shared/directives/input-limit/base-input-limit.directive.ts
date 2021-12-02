@@ -1,8 +1,8 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
-import { BaseNumInputLimitInterface } from './base-num-input-limit.interface';
+import { BaseInputLimitInterface } from './base-input-limit.interface';
 
 @Directive({})
-export class BaseNumInputLimitDirective implements BaseNumInputLimitInterface {
+export class BaseInputLimitDirective implements BaseInputLimitInterface {
   // Accept numbers to be inputed with two digit decimal values
   protected regularRegex: RegExp;
   // Allow key codes for special events

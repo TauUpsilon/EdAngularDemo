@@ -1,0 +1,8 @@
+<input type="text"
+  [value]="valueDisplay"
+  [disabled]="disabled"
+  (keyup)="onChange($event)"
+  appLimitWithRegex
+  [regex]="this.regex"
+>
+

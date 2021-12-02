@@ -1,4 +1,4 @@
-<div class="clearfix">
+<!-- <div class="clearfix">
   <div class="col-11 mx-auto">
     <div class="clearfix">
       <div class="sm-col sm-col-12 md-col-3 lg-col pt2 sticky" style="top: 4.5rem">
@@ -14,4 +14,13 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<button (click)="two()">two</button>
+<button (click)="zero()">zero</button>
+
+<form [formGroup]="form">
+  <app-currency-input formControlName="ccy" [decimalPlace]="decimalPlace" [minAmt]="5" [maxAmt]="10000"></app-currency-input>
+  <button (click)="submit()">Submit</button>
+  <button (click)="empty()">Empty</button>
+</form>

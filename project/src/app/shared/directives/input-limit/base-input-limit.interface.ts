@@ -1,4 +1,4 @@
 
-export interface BaseNumInputLimitInterface {
+export interface BaseInputLimitInterface {
   performKeyDown(event: KeyboardEvent): void;
 }

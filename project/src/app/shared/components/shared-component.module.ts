@@ -1,3 +1,4 @@
+import { SharedDirectiveModule } from 'src/app/shared/directives/shared-directive.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -22,6 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CircleCounterComponent } from './circle-counter/circle-counter.component';
 import { FormatInputComponent } from './format-input/format-input.component';
 import { TaiChiLoadingComponent } from './tai-chi-loading/tai-chi-loading.component';
+import { CcyAmtInputComponent } from './ccy-amt-input/ccy-amt-input.component';
 
 const MatComponents = [
   MatToolbarModule,
@@ -47,18 +49,21 @@ const MatComponents = [
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    SharedDirectiveModule
   ],
   exports: [
     MatComponents,
     CircleCounterComponent,
     FormatInputComponent,
     TaiChiLoadingComponent,
+    CcyAmtInputComponent
   ],
   declarations: [
     CircleCounterComponent,
     FormatInputComponent,
-    TaiChiLoadingComponent
+    TaiChiLoadingComponent,
+    CcyAmtInputComponent
   ]
 })
 export class SharedComponentModule { }

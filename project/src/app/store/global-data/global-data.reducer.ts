@@ -23,7 +23,7 @@ export class GlobalDataState {
         this.other = other;
     }
 }
-const initialGlobalDataStateState = new GlobalDataState(undefined, undefined, undefined, undefined);
+const initialGlobalDataStateState = new GlobalDataState(true, false, 100, new Map());
 
 export const globalDataReducer = createReducer(
     initialGlobalDataStateState,

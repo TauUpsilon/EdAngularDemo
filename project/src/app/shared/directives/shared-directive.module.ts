@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LimitWithTwoDecimalDirective } from './num-input-limit/limit-with-two-decimal.directive';
-import { OnlyIntegerDirective } from './num-input-limit/only-integer.directive';
+import { LimitWithRegexDirective } from './input-limit/limit-with-regex.directive';
 
 
 @NgModule({
@@ -9,12 +8,10 @@ import { OnlyIntegerDirective } from './num-input-limit/only-integer.directive';
     CommonModule
   ],
   exports: [
-    LimitWithTwoDecimalDirective,
-    OnlyIntegerDirective
+    LimitWithRegexDirective
   ],
   declarations: [
-    LimitWithTwoDecimalDirective,
-    OnlyIntegerDirective
+    LimitWithRegexDirective
   ]
 })
 export class SharedDirectiveModule { }
