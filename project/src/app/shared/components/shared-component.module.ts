@@ -24,6 +24,7 @@ import { CircleCounterComponent } from './circle-counter/circle-counter.componen
 import { FormatInputComponent } from './format-input/format-input.component';
 import { TaiChiLoadingComponent } from './tai-chi-loading/tai-chi-loading.component';
 import { CcyAmtInputComponent } from './ccy-amt-input/ccy-amt-input.component';
+import { OnlyDayPickerComponent } from './only-day-picker/only-day-picker.component';
 
 const MatComponents = [
   MatToolbarModule,
@@ -57,13 +58,15 @@ const MatComponents = [
     CircleCounterComponent,
     FormatInputComponent,
     TaiChiLoadingComponent,
-    CcyAmtInputComponent
+    CcyAmtInputComponent,
+    OnlyDayPickerComponent
   ],
   declarations: [
     CircleCounterComponent,
     FormatInputComponent,
     TaiChiLoadingComponent,
-    CcyAmtInputComponent
+    CcyAmtInputComponent,
+    OnlyDayPickerComponent
   ]
 })
 export class SharedComponentModule { }
