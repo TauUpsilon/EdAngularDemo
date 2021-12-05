@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
     ccy: new FormControl({value: '', disabled: false})
   });
 
-  decimalPlace = 2;
+  decimalPlace = 4;
   value = 1000;
 
   constructor(

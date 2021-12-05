@@ -78,17 +78,23 @@ export class CcyAmtInputComponent implements OnChanges, ControlValueAccessor, Va
   //   this.renderer.setAttribute(this.ccyAmtInput.nativeElement, 'pattern', '\\d*');
   // }
 
+
   onKeyUp(event: any) {
+    const currentCaretPosition = event.target.selectionStart;
+    const currentValLength = event.target.value
+      .toString()
+      .length;
     const currentVal = event.target.value
       .toString()
       .replace(/,/g, '');
 
-    if (
-      !isNaN(currentVal) &&
-      Number.isInteger(parseFloat(currentVal)) &&
-      Number(currentVal.split('.')[1]) !== 0
-    ) {
-        this.value = this.setValueFormat(currentVal);
+    this.value = this.setValueFormat(currentVal);
+
+    if (currentCaretPosition !== currentValLength) {
+      setTimeout(() => {
+        this.ccyAmtInput.nativeElement
+          .setSelectionRange(currentCaretPosition, currentCaretPosition);
+      }, 50);
     }
 
     this.formCtrlVal = currentVal;
@@ -118,9 +124,11 @@ export class CcyAmtInputComponent implements OnChanges, ControlValueAccessor, Va
   }
 
   setValueFormat(value: string): string {
-    return value
-      .replace(/\D/g, '')
-      .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ',');
+    const regex = new RegExp(`(\\d)(?=(?:\\d{3})+(?:\\.|$))|(\\.\\d{0,${this.decimalPlace}})$`, 'g');
+
+    return value.replace(regex, (_, s1, s2) => {
+      return s2 || (s1 + ',');
+    });
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
