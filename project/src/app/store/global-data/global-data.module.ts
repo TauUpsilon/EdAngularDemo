@@ -6,15 +6,15 @@ import { MODULE_ID } from './global-data.constant';
 import { GlobalDataEffect } from './global-data.effect';
 import { globalDataReducer } from './global-data.reducer';
 
-export const GlobalData_REDUCER = new InjectionToken<any>('globalDataReducer');
+export const GlobalDataReducer = new InjectionToken<any>('globalDataReducer');
 
 @NgModule({
     imports: [
-        StoreModule.forFeature(MODULE_ID, GlobalData_REDUCER),
+        StoreModule.forFeature(MODULE_ID, GlobalDataReducer),
         EffectsModule.forFeature([GlobalDataEffect])
     ],
     providers: [
-        { provide: GlobalData_REDUCER, useValue: globalDataReducer }
+        { provide: GlobalDataReducer, useValue: globalDataReducer }
     ]
 })
 export class GlobalDataModule { }

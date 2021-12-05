@@ -1,11 +1,8 @@
-import { switchMap } from 'rxjs/operators';
-import { ClearGlobalData, ClearGlobalOtherData } from './store/global-data/global-data.action';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, HostBinding, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../environments/environment'
-import { getGlobalData, UpdateGlobalDataProperties } from './store/global-data';
+import { environment } from '../environments/environment';
 import { Subject, Subscription } from 'rxjs';
 
 @Component({
