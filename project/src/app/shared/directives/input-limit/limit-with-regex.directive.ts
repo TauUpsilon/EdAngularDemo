@@ -1,11 +1,11 @@
 import { Directive, ElementRef, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { BaseInputLimitDirective } from './base-input-limit.directive';
-import { BaseInputLimitInterface } from './base-input-limit.interface';
 
 @Directive({
   selector: '[appLimitWithRegex]'
 })
-export class LimitWithRegexDirective extends BaseInputLimitDirective implements BaseInputLimitInterface, OnChanges {
+export class LimitWithRegexDirective extends BaseInputLimitDirective implements OnChanges {
+
 
   @Input() regex: RegExp;
 
@@ -38,5 +38,15 @@ export class LimitWithRegexDirective extends BaseInputLimitDirective implements 
     if (nextVal && !nextVal.match(this.regularRegex)) {
       event.preventDefault();
     }
+  }
+
+  performCompositionStart(event: CompositionEvent): void {
+
+  }
+  performCompositionUpdate(event: CompositionEvent): void {
+
+  }
+  performCompositionEnded(event: CompositionEvent): void {
+
   }
 }

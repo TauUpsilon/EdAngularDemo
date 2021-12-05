@@ -20,7 +20,10 @@
 <button (click)="zero()">zero</button>
 
 <form [formGroup]="form">
-  <app-currency-input formControlName="ccy" [decimalPlace]="decimalPlace" [minAmt]="5" [maxAmt]="10000"></app-currency-input>
+  <app-ccy-amt-input formControlName="ccy" [decimalPlace]="decimalPlace" [minAmt]="5" [maxAmt]="10000"></app-ccy-amt-input>
   <button (click)="submit()">Submit</button>
   <button (click)="empty()">Empty</button>
+  <br>
+  <button (click)="increase()">Increase</button>
+  <button (click)="decrease()">Decrease</button>
 </form>

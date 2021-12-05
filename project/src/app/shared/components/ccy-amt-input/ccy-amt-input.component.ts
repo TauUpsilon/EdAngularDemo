@@ -20,16 +20,17 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 })
 export class CcyAmtInputComponent implements OnChanges, ControlValueAccessor, Validator {
 
-  @Input() decimalPlace: number;
-  @Input() minAmt: number;
+  @Input() value = '';
+  @Input() decimalPlace = 0;
+  @Input() placeholder = '';
+  @Input() minAmt = 0;
   @Input() maxAmt: number;
 
   regex: RegExp;
 
   disabled = false;
 
-  value: any;
-  valueDisplay = '';
+  valueOut: any;
 
   propagateChange: any = () => { };
   propagateTouched: any = () => { };
@@ -37,46 +38,73 @@ export class CcyAmtInputComponent implements OnChanges, ControlValueAccessor, Va
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    for (const propName in changes) {
-      if (changes.hasOwnProperty(propName)) {
-        switch (propName) {
-          case 'decimalPlace':
-            this.decimalPlace = changes[propName].currentValue;
+    Object.keys(changes)
+      .forEach(propName => {
+        if (changes.hasOwnProperty(propName)) {
+          switch (propName) {
+            case 'value':
+              this.value =
+                this.setValueFormat(changes[propName].currentValue.toString());
 
-            if (this.decimalPlace > 0) {
-              this.regex = new RegExp(`^\\d*\\.?\\d{0,${this.decimalPlace}}$`, 'g');
-            } else {
-              this.regex = new RegExp(`^\\d*$`, 'g');
-            }
-            continue;
+              break;
 
-          default:
-            break;
+            case 'decimalPlace':
+              this.decimalPlace = changes[propName].currentValue;
+
+              if (this.decimalPlace > 0) {
+                this.regex =
+                  new RegExp(`^\\d*\\.?\\d{0,${this.decimalPlace}}$`, 'g');
+              } else {
+                this.regex =
+                  new RegExp(`^\\d*$`, 'g');
+              }
+              break;
+
+            case 'minAmt':
+              this.minAmt = changes[propName].currentValue;
+              break;
+
+            case 'maxAmt':
+              this.maxAmt = changes[propName].currentValue;
+              break;
+
+            default:
+              break;
+          }
         }
-      }
-    }
+      });
   }
 
-  onChange(e: any) {
-    this.value = e.target.value.replace(/,/g, '');
-
-    if (!isNaN(this.value) &&
-      Number.isInteger(parseFloat(this.value)) &&
-      Number(this.value.split('.')[1]) !== 0) {
-
-      this.valueDisplay = e.target.value
-        .replace(/\D/g, '')
-        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ',');
+  onChange(event: any) {
+    if (!isNaN(this.valueOut) &&
+      Number.isInteger(parseFloat(this.valueOut)) &&
+      Number(this.valueOut.split('.')[1]) !== 0) {
+        this.value =
+          this.setValueFormat(event.target.value.toString());
     }
 
-    this.propagateChange(Number(this.value));
+    this.valueOut = event.target.value.replace(/,/g, '');
+    this.propagateChange(Number(this.valueOut));
   }
+
+  // ngAfterViewInit(): void {
+  //   if (this.device.platform === 'iOS' && parseInt(this.device.version, 10) <= 12) {
+  //     this.renderer.setAttribute(this.ccyAmtInput.nativeElement, 'inputmode', 'numeric');
+  //   } else {
+  //     this.renderer.setAttribute(this.ccyAmtInput.nativeElement, 'inputmode', 'decimal');
+  //   }
+
+  //   this.renderer.setAttribute(this.ccyAmtInput.nativeElement, 'pattern', '\\d*');
+  // }
 
   writeValue(value: any): void {
-    this.valueDisplay = value
-      .replace(/\D/g, '')
-      .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ',');
-    this.value = value;
+    // form 表單清空會是null
+    if (value) {
+      this.value = this.setValueFormat(value);
+      this.valueOut = value;
+    } else {
+      this.value = '';
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -89,6 +117,12 @@ export class CcyAmtInputComponent implements OnChanges, ControlValueAccessor, Va
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  setValueFormat(value: string): string {
+    return value
+      .replace(/\D/g, '')
+      .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ',');
   }
 
   validate(control: AbstractControl): ValidationErrors | null {

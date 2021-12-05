@@ -1,13 +1,12 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
-import { BaseInputLimitInterface } from './base-input-limit.interface';
 
 @Directive({})
-export class BaseInputLimitDirective implements BaseInputLimitInterface {
-  // Accept numbers to be inputed with two digit decimal values
+export abstract class BaseInputLimitDirective {
+  // Accept numbers to be inputted with two digit decimal values
   protected regularRegex: RegExp;
   // Allow key codes for special events
   protected readonly specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Del', 'Delete'];
-  // Alloe key codes for a c v x
+  // Allow key codes for a c v x
   protected readonly acvxKeys: Array<string> = ['a', 'c', 'v', 'x'];
 
   constructor(readonly elRef: ElementRef) { }
@@ -35,7 +34,31 @@ export class BaseInputLimitDirective implements BaseInputLimitInterface {
     this.performKeyDown(event);
   }
 
-  performKeyDown(event: KeyboardEvent): void {
-    throw new Error('Method not implemented.');
+  @HostListener('compositionstart', ['$event']) onCompositionStart(event: CompositionEvent): void {
+    this.performCompositionStart(event);
+  }
+
+  @HostListener('compositionupdate', ['$event']) onCompositionUpdate(event: CompositionEvent): void {
+    this.performCompositionUpdate(event);
+  }
+
+  @HostListener('compositionend', ['$event']) onCompositionEnded(event: CompositionEvent): void {
+    this.performCompositionEnded(event);
+  }
+
+  abstract performKeyDown(event: KeyboardEvent): void;
+
+  abstract performCompositionStart(event: CompositionEvent): void;
+
+  abstract performCompositionUpdate(event: CompositionEvent): void;
+
+  abstract performCompositionEnded(event: CompositionEvent): void;
+
+  private tryPerform(performMethod: (e: Event) => void, event: Event): void {
+    try{
+      performMethod(event);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

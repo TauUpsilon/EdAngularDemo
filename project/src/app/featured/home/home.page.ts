@@ -16,10 +16,11 @@ export class HomePage implements OnInit {
   subscription = new Subscription();
 
   form  = new FormGroup({
-    ccy: new FormControl({value: '10000', disabled: false})
+    ccy: new FormControl({value: '1000', disabled: false})
   });
 
-  decimalPlace = 0;
+  decimalPlace = 2;
+  value = 1000;
 
   constructor(
     private readonly store: Store
@@ -46,5 +47,13 @@ export class HomePage implements OnInit {
   two(): void {
     this.decimalPlace = 2;
     this.form.get('ccy').setValue('');
+  }
+
+  increase(): void {
+    this.value ++;
+  }
+
+  decrease(): void {
+    this.value --;
   }
 }

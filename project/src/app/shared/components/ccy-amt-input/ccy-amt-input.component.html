@@ -1,8 +1,9 @@
 <input type="text"
-  [value]="valueDisplay"
+  [value]="value"
   [disabled]="disabled"
   (keyup)="onChange($event)"
   appLimitWithRegex
   [regex]="this.regex"
+  appLimitWithNoChinese
 >
 
