@@ -1,9 +1,10 @@
-<input type="text"
+<input #ccyAmtInput
+  type="text"
   [value]="value"
   [disabled]="disabled"
-  (keyup)="onChange($event)"
-  appLimitWithRegex
-  [regex]="this.regex"
-  appLimitWithNoChinese
+  (keyup)="onKeyUp($event)"
+  appDecimalPlaceInputLimit
+  [decimalPlace]="this.decimalPlace"
+  appChineseInputLimit
 >
 

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LimitWithNoChineseDirective } from './input-limit/limit-with-no-chinese.directive';
-import { LimitWithRegexDirective } from './input-limit/limit-with-regex.directive';
+import { ChineseInputLimitDirective } from './input-limit/chinese-input-limit.directive';
+import { DecimalPlaceInputLimitDirective } from './input-limit/decimal-place-input-limit.directive';
 
 
 @NgModule({
@@ -9,12 +9,12 @@ import { LimitWithRegexDirective } from './input-limit/limit-with-regex.directiv
     CommonModule
   ],
   exports: [
-    LimitWithRegexDirective,
-    LimitWithNoChineseDirective
+    DecimalPlaceInputLimitDirective,
+    ChineseInputLimitDirective
   ],
   declarations: [
-    LimitWithRegexDirective,
-    LimitWithNoChineseDirective
+    DecimalPlaceInputLimitDirective,
+    ChineseInputLimitDirective
   ]
 })
 export class SharedDirectiveModule { }

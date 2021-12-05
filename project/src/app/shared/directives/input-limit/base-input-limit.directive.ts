@@ -3,7 +3,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 @Directive({})
 export abstract class BaseInputLimitDirective {
   // Accept numbers to be inputted with two digit decimal values
-  protected regularRegex: RegExp;
+  protected regex: RegExp;
   // Allow key codes for special events
   protected readonly specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Del', 'Delete'];
   // Allow key codes for a c v x
@@ -17,7 +17,7 @@ export abstract class BaseInputLimitDirective {
     const clipboardData = event.clipboardData;
     const pastedText = clipboardData.getData('text');
 
-    if (pastedText && !pastedText.match(this.regularRegex)) {
+    if (pastedText && !pastedText.match(this.regex)) {
       event.preventDefault();
     }
   }
@@ -53,12 +53,4 @@ export abstract class BaseInputLimitDirective {
   abstract performCompositionUpdate(event: CompositionEvent): void;
 
   abstract performCompositionEnded(event: CompositionEvent): void;
-
-  private tryPerform(performMethod: (e: Event) => void, event: Event): void {
-    try{
-      performMethod(event);
-    } catch (e) {
-      console.log(e);
-    }
-  }
 }

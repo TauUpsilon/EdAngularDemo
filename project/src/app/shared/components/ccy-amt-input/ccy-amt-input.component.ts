@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
 @Component({
@@ -20,20 +20,22 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 })
 export class CcyAmtInputComponent implements OnChanges, ControlValueAccessor, Validator {
 
-  @Input() value = '';
+  @Input() value: any = '';
   @Input() decimalPlace = 0;
   @Input() placeholder = '';
   @Input() minAmt = 0;
   @Input() maxAmt: number;
 
+  @ViewChild('ccyAmtInput') ccyAmtInput: ElementRef;
+
   regex: RegExp;
 
   disabled = false;
 
-  valueOut: any;
+  formCtrlVal: any;
 
-  propagateChange: any = () => { };
-  propagateTouched: any = () => { };
+  doChange: any = () => { };
+  doTouched: any = () => { };
 
   constructor() { }
 
@@ -45,19 +47,10 @@ export class CcyAmtInputComponent implements OnChanges, ControlValueAccessor, Va
             case 'value':
               this.value =
                 this.setValueFormat(changes[propName].currentValue.toString());
-
               break;
 
             case 'decimalPlace':
               this.decimalPlace = changes[propName].currentValue;
-
-              if (this.decimalPlace > 0) {
-                this.regex =
-                  new RegExp(`^\\d*\\.?\\d{0,${this.decimalPlace}}$`, 'g');
-              } else {
-                this.regex =
-                  new RegExp(`^\\d*$`, 'g');
-              }
               break;
 
             case 'minAmt':
@@ -75,18 +68,6 @@ export class CcyAmtInputComponent implements OnChanges, ControlValueAccessor, Va
       });
   }
 
-  onChange(event: any) {
-    if (!isNaN(this.valueOut) &&
-      Number.isInteger(parseFloat(this.valueOut)) &&
-      Number(this.valueOut.split('.')[1]) !== 0) {
-        this.value =
-          this.setValueFormat(event.target.value.toString());
-    }
-
-    this.valueOut = event.target.value.replace(/,/g, '');
-    this.propagateChange(Number(this.valueOut));
-  }
-
   // ngAfterViewInit(): void {
   //   if (this.device.platform === 'iOS' && parseInt(this.device.version, 10) <= 12) {
   //     this.renderer.setAttribute(this.ccyAmtInput.nativeElement, 'inputmode', 'numeric');
@@ -97,22 +78,39 @@ export class CcyAmtInputComponent implements OnChanges, ControlValueAccessor, Va
   //   this.renderer.setAttribute(this.ccyAmtInput.nativeElement, 'pattern', '\\d*');
   // }
 
+  onKeyUp(event: any) {
+    const currentVal = event.target.value
+      .toString()
+      .replace(/,/g, '');
+
+    if (
+      !isNaN(currentVal) &&
+      Number.isInteger(parseFloat(currentVal)) &&
+      Number(currentVal.split('.')[1]) !== 0
+    ) {
+        this.value = this.setValueFormat(currentVal);
+    }
+
+    this.formCtrlVal = currentVal;
+    this.doChange(Number(this.formCtrlVal));
+  }
+
   writeValue(value: any): void {
     // form 表單清空會是null
     if (value) {
       this.value = this.setValueFormat(value);
-      this.valueOut = value;
+      this.formCtrlVal = value;
     } else {
       this.value = '';
     }
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.doChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouched = fn;
+    this.doTouched = fn;
   }
 
   setDisabledState?(isDisabled: boolean): void {
