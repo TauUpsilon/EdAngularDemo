@@ -5,7 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { UpdateGlobalDataProperties } from 'src/app/store/global-data';
 import { FormControl, FormGroup } from '@angular/forms';
-import { TimerOutput, TimeSwitcherState } from 'src/app/shared/components/circle-counter/circle-counter.component';
+import { TimerOutput, TimeSwitcherState } from 'src/app/shared/components/circle-countdown/circle-countdown.component';
+
 
 @Component({
   selector: 'app-home',
