@@ -1,4 +1,8 @@
-import { Directive, ElementRef, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
+/**
+ * 小數點位數輸入限制 Directive
+ */
+
+import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseInputLimitDirective } from './base-input-limit.directive';
 
 @Directive({
@@ -36,6 +40,10 @@ export class DecimalPlaceInputLimitDirective extends BaseInputLimitDirective imp
       });
   }
 
+  /**
+   * KeyDown 事件
+   * @param event 鍵盤事件
+   */
   performKeyDown(event: KeyboardEvent): void {
     const currentVal = this.elRef.nativeElement.value
       .toString()
@@ -48,18 +56,14 @@ export class DecimalPlaceInputLimitDirective extends BaseInputLimitDirective imp
       currentVal.slice(position)
     ].join('');
 
+    // 是否 Match 需要的 Regex Pattern
     if (nextVal && !nextVal.match(this.regex)) {
       event.preventDefault();
     }
   }
 
-  performCompositionStart(event: CompositionEvent): void {
-
-  }
-  performCompositionUpdate(event: CompositionEvent): void {
-
-  }
-  performCompositionEnded(event: CompositionEvent): void {
-
-  }
+  // 非實作 Methods
+  performCompositionStart(event: CompositionEvent): void { }
+  performCompositionUpdate(event: CompositionEvent): void { }
+  performCompositionEnded(event: CompositionEvent): void { }
 }

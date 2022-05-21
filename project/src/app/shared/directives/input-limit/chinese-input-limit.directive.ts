@@ -1,4 +1,8 @@
-import { Directive, ElementRef, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
+/**
+ * 中文輸入禁止 Directive
+ */
+
+import { Directive, ElementRef } from '@angular/core';
 import { BaseInputLimitDirective } from './base-input-limit.directive';
 
 @Directive({
@@ -10,17 +14,7 @@ export class ChineseInputLimitDirective extends BaseInputLimitDirective {
     super(elRef);
   }
 
-  performKeyDown(event: KeyboardEvent): void {
-
-  }
-  performCompositionStart(event: CompositionEvent): void {
-
-  }
-  performCompositionUpdate(event: CompositionEvent): void {
-
-  }
-
-  performCompositionEnded(event: CompositionEvent) {
+  performCompositionEnded(event: CompositionEvent): void  {
     const currentVal = this.elRef.nativeElement.value.toString();
 
     this.regex = /[^\x00-\x7F]/g;
@@ -29,4 +23,9 @@ export class ChineseInputLimitDirective extends BaseInputLimitDirective {
       this.elRef.nativeElement.value = currentVal.replace(this.regex, '');
     }
   }
+
+  // 非實作 Methods
+  performKeyDown(event: KeyboardEvent): void { }
+  performCompositionStart(event: CompositionEvent): void  { }
+  performCompositionUpdate(event: CompositionEvent): void  { }
 }

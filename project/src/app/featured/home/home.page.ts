@@ -1,11 +1,11 @@
 import { switchMap, filter, take } from 'rxjs/operators';
-import { combineLatest, of, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, of, Subscription } from 'rxjs';
 import { getGlobalData } from './../../store/global-data/global-data.selector';
 import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { UpdateGlobalDataProperties } from 'src/app/store/global-data';
 import { FormControl, FormGroup } from '@angular/forms';
-
+import { TimerOutput, TimeSwitcherState } from 'src/app/shared/components/circle-counter/circle-counter.component';
 
 @Component({
   selector: 'app-home',
@@ -15,19 +15,29 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class HomePage implements OnInit {
   subscription = new Subscription();
 
-  form  = new FormGroup({
-    ccy: new FormControl({value: '', disabled: false})
+  form = new FormGroup({
+    ccy: new FormControl({ value: '', disabled: false }),
   });
 
   decimalPlace = 4;
   value = 1000;
 
-  constructor(
-    private readonly store: Store
-  ) {}
+  // 宣告當前倒數的時間
+  currentTickTime: number;
 
-  ngOnInit(): void  {
+  // 宣告是否重置計時器
+  isResetTimer: boolean;
 
+  // 宣告倒數計時器開關
+  timerSwitcher$ = new BehaviorSubject<TimeSwitcherState>({
+    isStartToTick: true,
+  });
+
+  constructor(private readonly store: Store) {}
+
+  ngOnInit(): void {
+    // 設定開始倒數
+    this.timerSwitcher$.next({ isStartToTick: true });
   }
 
   submit(): void {
@@ -50,10 +60,35 @@ export class HomePage implements OnInit {
   }
 
   increase(): void {
-    this.value ++;
+    this.value++;
   }
 
   decrease(): void {
-    this.value --;
+    this.value--;
+  }
+
+  /**
+   * 確認到數時間
+   * @param event: 來自 Circle Counter Emitter 的當下秒數
+   * @returns void
+   */
+  onTimeCheck(event: TimerOutput): void {
+    if (event.tickVal < 1) {
+      // this.isNextDisable = true;
+      if (event.isStopInSubscription) {
+        // this.isNextDisable = true;
+      }
+    }
+
+    this.currentTickTime = event.tickVal;
+  }
+
+  /**
+   * 確認是否使用者重置 Timer
+   * @param event: 來自 Circle Counter Emitter 來確認使用者是否按重置時間
+   * @returns void
+   */
+   onResetTimer(): void {
+    this.timerSwitcher$.next({ isStartToTick: true });
   }
 }

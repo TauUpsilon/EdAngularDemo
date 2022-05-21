@@ -16,7 +16,7 @@
   </div>
 </div> -->
 
-<button (click)="two()">two</button>
+<!-- <button (click)="two()">two</button>
 <button (click)="zero()">zero</button>
 
 <form [formGroup]="form">
@@ -26,6 +26,19 @@
   <br>
   <button (click)="increase()">Increase</button>
   <button (click)="decrease()">Decrease</button>
-</form>
+</form> -->
 
-<app-only-day-picker [title]="'每月扣款日期'" [pickMode]="'multi'" [dayLimit]="12"></app-only-day-picker>
+<!-- <app-only-day-picker [title]="'每月扣款日期'" [pickMode]="'multi'" [dayLimit]="12"></app-only-day-picker> -->
+
+<app-circle-counter
+  style="margin-right: auto; width: 100%"
+  [timeLimit]="10"
+  [timerSize]="40"
+  [color]="'#F04553'"
+  [sideNote]="'剩餘時間'"
+  [restartName]="'重新試算'"
+  [switcher]="timerSwitcher$"
+  (tick)="onTimeCheck($event)"
+  (restart)="onResetTimer()"
+>
+</app-circle-counter>

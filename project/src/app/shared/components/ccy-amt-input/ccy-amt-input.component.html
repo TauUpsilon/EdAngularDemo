@@ -2,9 +2,10 @@
   type="text"
   [value]="value"
   [disabled]="disabled"
+  [placeholder]="placeholder"
   (keyup)="onKeyUp($event)"
   appDecimalPlaceInputLimit
   [decimalPlace]="this.decimalPlace"
   appChineseInputLimit
+  (blur)="onBlur()"
 >
-
